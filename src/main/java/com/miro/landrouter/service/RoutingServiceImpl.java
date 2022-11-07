@@ -24,7 +24,7 @@ public class RoutingServiceImpl implements RoutingService {
 	private final CountryService countryService;
 
 	@Override
-	public Route route(String origin, String destination) throws IOException {
+	public Route route(String origin, String destination) {
 
 		var countries = countryService.countries().stream()
 			.collect(Collectors.toMap(Country::getName, Function.identity()));

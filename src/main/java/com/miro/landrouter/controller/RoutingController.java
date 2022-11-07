@@ -29,34 +29,9 @@ public class RoutingController {
 
   private final RoutingService routingService;
 
-  private final CountryService countryService;
-
-  private final CountryMapper countryMapper;
-
   @GetMapping("/routing/{origin}/{destination}")
-  public ResponseEntity<Route> getRoute(@PathVariable String origin, @PathVariable String destination) throws IOException {
-    var route = routingService.route(origin, destination);
+  public ResponseEntity<Route> getRoute(@PathVariable String origin, @PathVariable String destination) {
+    Route route = routingService.route(origin, destination);
     return ResponseEntity.ok(route);
-  }
-  @GetMapping("/countries")
-  public ResponseEntity<List<Country>> getCountries() throws IOException {
-
-    ObjectMapper mapper = new ObjectMapper();
-		String filePath = new ClassPathResource("classpath:countries.json").getPath();
-		Path path = ResourceUtils.getFile("classpath:countries.json").toPath();
-		Object[] objects = mapper.readValue(path.toFile(), Object[].class);
-//    System.out.println("size: " + objects.length);
-    for (Object object : objects) {
-      System.out.println(object);
-    }
-//    countryMapper.fromDto(List.of(objects));
-
-//    for (CountryDto object : objects) {
-//      System.out.println(object);
-//    }
-
-//    var countries = countryService.countries();
-//    return ResponseEntity.ok(countries);
-    return null;
   }
 }

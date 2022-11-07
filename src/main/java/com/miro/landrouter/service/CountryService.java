@@ -6,5 +6,5 @@ import java.util.List;
 import com.miro.landrouter.data.Country;
 
 public interface CountryService {
-	List<Country> countries() throws IOException;
+	List<Country> countries();
 }

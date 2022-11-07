@@ -11,6 +11,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miro.landrouter.controller.dto.CountryDto;
 
 import com.miro.landrouter.mapper.CountryMapper;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
@@ -27,12 +30,16 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 @AllArgsConstructor
+@NoArgsConstructor
 public class CountryServiceImpl implements CountryService {
 
-	private final CountryMapper countryMapper;
+	@Value("${data.apipath}")
+	private String apipath;
+	@Autowired
+	private CountryMapper countryMapper;
 
 	@Override
-	public List<Country> countries() throws IOException {
+	public List<Country> countries() {
 
 		RestTemplate restTemplate = new RestTemplate();
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
@@ -40,12 +47,8 @@ public class CountryServiceImpl implements CountryService {
 		converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
 		messageConverters.add(converter);
 		restTemplate.setMessageConverters(messageConverters);
-		ResponseEntity<CountryDto[]> countries = restTemplate.getForEntity("https://raw.githubusercontent.com/mledoze/countries/master/countries.json", CountryDto[].class);
+		ResponseEntity<CountryDto[]> countries = restTemplate.getForEntity(apipath, CountryDto[].class);
 
-//		ObjectMapper mapper = new ObjectMapper();
-//		String filePath = new ClassPathResource("classpath:countries.json").getPath();
-//		Path path = ResourceUtils.getFile("classpath:countries.json").toPath();
-//		mapper.readValue(path.toFile(), CountryDto.class);
 		return countryMapper.fromDto(List.of(Objects.requireNonNull(countries.getBody())));
 	}
 }

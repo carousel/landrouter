@@ -18,7 +18,7 @@ class CountryMapperTest {
 
 	@Test
 	void testFromDto_oneObject() {
-		var countryDto = new CountryDto("one", "Asia", List.of("two", "three"));
+		var countryDto = new CountryDto("hello", "Americas", List.of("world", "three"));
 		var country = mapper.fromDto(countryDto);
 
 		assertCountry(countryDto, country);

@@ -2,7 +2,6 @@ package com.miro.landrouter.util.graph;
 
 import java.util.*;
 
-
 import com.miro.landrouter.data.Country;
 import com.miro.landrouter.exception.RouteSearchException;
 import com.miro.landrouter.util.stream.Collector;
@@ -21,7 +20,7 @@ public class RouteSearch {
   private final Map<Country, Country> previous = new HashMap<>();
 
   public final List<String> paths() {
-    var currentCountry = origin;
+    Country currentCountry = origin;
 
     Queue<Country> pivot = new ArrayDeque<>();
     pivot.add(currentCountry);
@@ -30,25 +29,25 @@ public class RouteSearch {
 
     while (!pivot.isEmpty()) {
       currentCountry = pivot.remove();
-      log.debug("Visiting " + currentCountry.getName());
+      log.debug("Visiting country: " + currentCountry.getName());
       if (currentCountry.equals(destination)) {
-        log.debug("Origin and destination are equal");
+        log.debug("Origin and destination are equal!!!");
         break;
       } else {
         for (var neighbour : currentCountry.getBorders()) {
-          var neighbourCountry = countries.get(neighbour);
+          Country neighbourCountry = countries.get(neighbour);
           if(!visited.containsKey(neighbourCountry)){
-            log.debug("... registering neighbour " + neighbourCountry.getName());
+            log.debug("Registering neighbour: " + neighbourCountry.getName());
             pivot.add(neighbourCountry);
             visited.put(neighbourCountry, true);
             previous.put(neighbourCountry, currentCountry);
             if (neighbourCountry.equals(destination)) {
-              log.debug("Shortest path found");
+              log.debug("Shortest path found!");
               currentCountry = neighbourCountry;
               break;
             }
           } else {
-            log.debug("... skipping neighbour " + neighbourCountry.getName());
+            log.debug("Skipping neighbour " + neighbourCountry.getName());
           }
         }
       }

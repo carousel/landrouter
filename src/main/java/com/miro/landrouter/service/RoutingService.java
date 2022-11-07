@@ -5,5 +5,5 @@ import com.miro.landrouter.model.Route;
 import java.io.IOException;
 
 public interface RoutingService {
-	Route route(String origin, String destination) throws IOException;
+	Route route(String origin, String destination);
 }
