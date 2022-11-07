@@ -16,7 +16,7 @@ class CollectorTest {
 	void testEmpty() {
 		Assertions.assertTrue(
 			Stream.empty()
-				.collect(Collector.reversing())
+				.collect(Collector.reversed())
 				.isEmpty());
 	}
 
@@ -26,7 +26,7 @@ class CollectorTest {
 			List.of(3, 2, 1),
 			List.of(1, 2, 3)
 				.stream()
-				.collect(Collector.reversing()));
+				.collect(Collector.reversed()));
 	}
 
 	@Test
@@ -35,7 +35,7 @@ class CollectorTest {
 			List.of(new Pojo(3, "three"), new Pojo(2, "two"), new Pojo(1, "one")),
 			List.of(new Pojo(1, "one"), new Pojo(2, "two"), new Pojo(3, "three"))
 				.stream()
-				.collect(Collector.reversing()));
+				.collect(Collector.reversed()));
 	}
 
 	@Data

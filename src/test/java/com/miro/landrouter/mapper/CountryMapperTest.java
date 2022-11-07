@@ -41,7 +41,7 @@ class CountryMapperTest {
 	}
 
 	@Test
-	void testFromDto_invalidRegion() {
+	void testFromDtoInvalidRegion() {
 		var countryDto = new CountryDto("one", "Blah", List.of());
 		var country = mapper.fromDto(countryDto);
 

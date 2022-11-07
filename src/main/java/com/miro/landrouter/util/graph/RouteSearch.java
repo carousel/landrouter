@@ -28,7 +28,7 @@ public class RouteSearch {
 
     visited.put(currentCountry, true);
 
-    OUTER: while (!pivot.isEmpty()) {
+    while (!pivot.isEmpty()) {
       currentCountry = pivot.remove();
       log.debug("Visiting " + currentCountry.getName());
       if (currentCountry.equals(destination)) {
@@ -45,7 +45,7 @@ public class RouteSearch {
             if (neighbourCountry.equals(destination)) {
               log.debug("Shortest path found");
               currentCountry = neighbourCountry;
-              break OUTER;
+              break;
             }
           } else {
             log.debug("... skipping neighbour " + neighbourCountry.getName());
@@ -65,6 +65,6 @@ public class RouteSearch {
 
     return path.stream()
             .map(Country::getName)
-            .collect(Collector.reversing());
+            .collect(Collector.reversed());
   }
 }

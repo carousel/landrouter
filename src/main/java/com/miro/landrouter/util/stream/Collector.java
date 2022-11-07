@@ -9,7 +9,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Collector {
 
-  public static <T> java.util.stream.Collector<T, ?, List<T>> reversing() {
+  public static <T> java.util.stream.Collector<T, ?, List<T>> reversed() {
     return Collectors.collectingAndThen(Collectors.toList(), list -> {
       Collections.reverse(list);
       return list;
