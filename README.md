@@ -1,7 +1,7 @@
 # How to run:
 
 ## Prerequisites:
-    This project is using Java 18 but and Maven 3.8.6. No additional dependencies are required to run. 
+    This project is using Java 18 and Maven 3.8.6. No additional dependencies are required to run. 
     For testing API use Curl or Postman (recommended)
 
 ## Install and run:
